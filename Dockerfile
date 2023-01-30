@@ -1,5 +1,5 @@
-FROM node:4.2
-COPY . /src
-RUN cd /src && npm install
-EXPOSE 4000
-CMD ["node", "/src/server.js"]
+FROM node:10
+WORKDIR /usr/src/app
+COPY . .
+RUN npm install
+CMD ["node", "server.js"]
