@@ -29,15 +29,17 @@ pipeline{
                     #Check for existing docker container process & kill it
                     if [ `docker ps | grep ${APP_CONTAINER_NAME} | wc -l` -eq 1 ]
                     then
+                        echo -n "Killing following docker container process: "
                         docker kill `docker ps | grep ${APP_CONTAINER_NAME} | cut -d" " -f1`
-                        echo "Killed existing docker container process"
+                        echo "Killed above docker container process."
                     fi
 
                     #Check for existing docker container & remove it
                     if [ `docker ps -a | grep ${APP_CONTAINER_NAME} | wc -l` -eq 1 ]
                     then
+                        echo -n "Removing following docker container: "
                         docker rm `docker ps -a | grep ${APP_CONTAINER_NAME} | cut -d" " -f1`
-                        echo "Remove existing docker container"
+                        echo "Removed above docker container."
                     fi
                     docker container run -d -p 8080:8080 --name ${APP_CONTAINER_NAME} ${ECR_IMAGE}
                 '''
