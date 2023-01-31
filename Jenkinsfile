@@ -23,7 +23,8 @@ pipeline{
        stage('Deploy to app host') {
         steps{
             sshagent(credentials : ['agent']) {
-                sh +x '''
+                sh '''
+                    sh +x
                     ssh -o StrictHostKeyChecking=no ubuntu@10.0.2.150
                     aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 049721949876.dkr.ecr.us-east-1.amazonaws.com
                     #Check for existing docker container process & kill it
