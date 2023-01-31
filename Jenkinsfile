@@ -27,14 +27,14 @@ pipeline{
                     ssh -o StrictHostKeyChecking=no ubuntu@10.0.2.150
                     aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 049721949876.dkr.ecr.us-east-1.amazonaws.com
                     #Check for existing docker container process & kill it
-                    if [ `docker ps | wc -l` -gt 1 ]
+                    if [ `docker ps | grep ${APP_CONTAINER_NAME} | wc -l` -eq 1 ]
                     then
                         docker kill `docker ps | grep ${APP_CONTAINER_NAME} | cut -d" " -f1`
                         echo "Killed existing docker container process"
                     fi
 
                     #Check for existing docker container & remove it
-                    if [ `docker ps -a | wc -l` -gt 1 ]
+                    if [ `docker ps -a | grep ${APP_CONTAINER_NAME} | wc -l` -eq 1 ]
                     then
                         docker rm `docker ps -a | grep ${APP_CONTAINER_NAME} | cut -d" " -f1`
                         echo "Remove existing docker container"
