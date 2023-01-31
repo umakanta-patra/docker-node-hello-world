@@ -22,7 +22,6 @@ pipeline{
         steps{
             sh '''
                 aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 049721949876.dkr.ecr.us-east-1.amazonaws.com
-                docker push 049721949876.dkr.ecr.us-east-1.amazonaws.com/node_app:v${BUILD_NUMBER}
                 docker container run -d -p 8080:8080 ${ECR_IMAGE}
             '''
         }
