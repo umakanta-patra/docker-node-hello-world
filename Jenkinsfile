@@ -35,10 +35,10 @@ pipeline{
                     if [ `docker ps | grep ${APP_CONTAINER_NAME} | wc -l` -eq 1 ]
                     then
                         container_id=`docker ps | grep ${APP_CONTAINER_NAME} | cut -d" " -f1`
-                        echo "Killing/Removing following docker container: ${container_id}"
+                        echo "[INFO] Killing/Removing following docker container: ${container_id}"
                         docker kill ${container_id}
                         docker rm ${container_id}
-                        echo "Killed/Removed above docker container process."
+                        echo "[INFO] Killed/Removed above docker container process: ${container_id}"
                     fi
 
                     #Create and run app image on app machine
