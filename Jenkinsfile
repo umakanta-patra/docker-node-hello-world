@@ -32,9 +32,9 @@ pipeline{
                     aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 049721949876.dkr.ecr.us-east-1.amazonaws.com
                     
                     #Check for existing docker container & kill/remove it
-                    if [ `docker ps | grep ${APP_CONTAINER_NAME} | wc -l` -eq 1 ]
+                    if [ `docker ps | grep ${APP_CONTAINER_NAME}$ | wc -l` -eq 1 ]
                     then
-                        container_id=`docker ps | grep ${APP_CONTAINER_NAME} | cut -d" " -f1`
+                        container_id=`docker ps | grep ${APP_CONTAINER_NAME}$ | cut -d" " -f1`
                         echo "[INFO] Killing/Removing following docker container: ${container_id}"
                         docker kill ${container_id}
                         docker rm ${container_id}
